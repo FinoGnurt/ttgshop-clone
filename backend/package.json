@@ -1,0 +1,53 @@
+{
+  "name": "backend",
+  "module": "src/server.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bunx nodemon",
+    "build": "rimraf ./dist && tsc && tsc-alias",
+    "start": "node dist/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "migrate": "bunx prisma migrate dev --name init",
+    "generate": "bunx prisma generate"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.37.0",
+    "@types/bcrypt": "^6.0.0",
+    "@types/bun": "latest",
+    "@types/node": "^24.7.2",
+    "chalk": "^5.6.2",
+    "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.4.0",
+    "jiti": "^2.6.1",
+    "nodemon": "^3.1.10",
+    "prettier": "3.6.2",
+    "prisma": "^6.17.1",
+    "rimraf": "^6.0.1",
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.20.6",
+    "typescript-eslint": "^8.46.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/formbody": "^8.0.2",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/multipart": "^9.2.1",
+    "@prisma/client": "^6.17.1",
+    "@sinclair/typebox": "^0.34.41",
+    "ajv": "^8.17.1",
+    "ajv-errors": "^3.0.0",
+    "bcrypt": "^6.0.0",
+    "fastify": "^5.6.1",
+    "fastify-i18n": "^3.0.0",
+    "node-cron": "^4.2.1"
+  }
+}

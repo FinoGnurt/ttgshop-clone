@@ -1,0 +1,31 @@
+{
+  "EMAIL_REQUIRED": "Vui lòng nhập email.",
+  "EMAIL_INVALID": "Email không hợp lệ.",
+  "EMAIL_DUPLICATE": "Email đã tồn tại. Vui lòng nhập email khác!",
+  "EMAIL_UNDEFINE": "Vui lòng nhập email.",
+
+  "PASSWORD_REQUIRED": "Vui lòng nhập mật khẩu.",
+  "PASSWORD_INVALID": "Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường và số.",
+  "PASSWORD_UNDEFINE": "Vui lòng nhập mật khẩu.",
+
+  "NAME_REQUIRED": "Vui lòng nhập tên người dùng.",
+  "NAME_INVALID": "Tên người dùng không hợp lệ.",
+
+  "FIELD_INVALID": "Trường không hợp lệ.",
+  "INVALID_PAYLOAD": "Dữ liệu gửi lên không hợp lệ.",
+  "USER_CREATED": "Tạo tài khoản thành công",
+  "TEXT_NOTFOUND": "%{text} không tồn tại trong hệ thống.",
+
+  "AUTH_USER_NOT_FOUND": "Người dùng không tồn tại.",
+  "AUTH_PASSWORD_INCORRECT": "Mật khẩu không chính xác.",
+  "AUTH_USERNAME_INVALID": "Tên người dùng không hợp lệ.",
+  "AUTH_EMAIL_INVALID": "Email không hợp lệ.",
+  "AUTH_ACCOUNT_LOCKED": "Tài khoản đã bị khóa.",
+  "AUTH_TOKEN_EXPIRED": "Phiên đăng nhập đã hết hạn.",
+  "AUTH_UNAUTHORIZED": "Bạn chưa được xác thực.",
+
+  "EMAIL_NOT_FOUND": "Email không tồn tại.",
+  "PASSWORD_INCORRECT": "Mật khẩu không chính xác.",
+  "ACCOUNT_LOCKED": "Tài khoản đã bị khóa. Vui lòng liên hệ hỗ trợ.",
+  "AUTH_INVALID_CREDENTIALS": "Email hoặc mật khẩu không chính xác."
+}

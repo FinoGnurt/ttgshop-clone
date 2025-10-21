@@ -1,0 +1,36 @@
+{
+  "CONTINUE": "Tiếp tục gửi request",
+  "SWITCHING_PROTOCOLS": "Đang chuyển giao thức",
+  "PROCESSING": "Đang xử lý (WebDAV)",
+
+  "OK": "Thành công",
+  "CREATED": "Đã tạo",
+  "ACCEPTED": "Đã chấp nhận",
+  "NO_CONTENT": "Không có nội dung",
+  "PARTIAL_CONTENT": "Nội dung một phần",
+
+  "MULTIPLE_CHOICES": "Nhiều lựa chọn",
+  "MOVED_PERMANENTLY": "Đã chuyển hướng (vĩnh viễn)",
+  "FOUND": "Đã tìm thấy (chuyển hướng tạm thời)",
+  "SEE_OTHER": "Xem tài nguyên khác",
+  "NOT_MODIFIED": "Chưa thay đổi",
+  "TEMPORARY_REDIRECT": "Chuyển hướng tạm thời",
+  "PERMANENT_REDIRECT": "Chuyển hướng vĩnh viễn",
+
+  "BAD_REQUEST": "Yêu cầu không hợp lệ",
+  "UNAUTHORIZED": "Chưa xác thực",
+  "FORBIDDEN": "Không có quyền truy cập",
+  "NOT_FOUND": "Không tìm thấy",
+  "METHOD_NOT_ALLOWED": "Phương thức không được phép",
+  "NOT_ACCEPTABLE": "Không chấp nhận",
+  "CONFLICT": "Xung đột",
+  "GONE": "Đã bị xóa",
+  "UNPROCESSABLE_ENTITY": "Dữ liệu không xử lý được (validation)",
+  "TOO_MANY_REQUESTS": "Quá nhiều yêu cầu",
+
+  "INTERNAL_SERVER_ERROR": "Lỗi máy chủ",
+  "NOT_IMPLEMENTED": "Chưa được triển khai",
+  "BAD_GATEWAY": "Lỗi cổng trung gian",
+  "SERVICE_UNAVAILABLE": "Dịch vụ tạm thời không khả dụng",
+  "GATEWAY_TIMEOUT": "Hết thời gian chờ cổng"
+}

@@ -1,0 +1,13 @@
+{
+  "watch": ["src", ".env"],
+  "ext": "ts,js,json,env",
+  "ignore": ["node_modules", "dist"],
+  "exec": "tsx src/server.ts",
+  "quiet": true,
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "events": {
+    "start": "echo =================================================="
+  }
+}

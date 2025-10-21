@@ -1,0 +1,11 @@
+{
+  "EMAIL_REQUIRED": "Please enter an email address.",
+  "EMAIL_INVALID": "Invalid email address.",
+  "PASSWORD_REQUIRED": "Please enter a password.",
+  "PASSWORD_INVALID": "Password must be at least 8 characters long and include uppercase letters, lowercase letters, and numbers.",
+  "NAME_REQUIRED": "Please enter a username.",
+  "NAME_INVALID": "Invalid username.",
+  "FIELD_INVALID": "Invalid field.",
+  "INVALID_PAYLOAD": "Invalid submitted data.",
+  "USER_CREATED": "Account created successfully."
+}
