@@ -1,9 +1,10 @@
 // auth
+import { loginGoogle } from './auth/google.controller.ts'
 import { refreshToken } from './auth/refresh.controller.ts'
 import { signIn } from './auth/signIn.controller.ts'
 import { signOut } from './auth/signOut.controller.ts'
 import { signUp } from './auth/signUp.controller.ts'
-export { refreshToken, signIn, signOut, signUp }
+export { loginGoogle, refreshToken, signIn, signOut, signUp }
 
 // user
 import { deleteUser } from './user/delete.controller.ts'

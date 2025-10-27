@@ -33,7 +33,7 @@ const app = fastify({
 export const buildApp = () => {
   // Plugins
   app.register(fastifyMultipart)
-  //   app.register(cors, { origin: "*" });
+  //   app.register(cors, { origin: "*" }); app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
   app.register(prismaPlugin)
   app.register(i18n, {
     fallbackLocale: 'vi',

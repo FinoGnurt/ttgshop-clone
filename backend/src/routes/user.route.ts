@@ -1,6 +1,6 @@
 import { type FastifyInstance } from 'fastify'
 import { deleteUser, getUserById, getUsers, updateUser } from '~/controllers/index.ts'
-import type { IdParams } from '~/schemas/all.schema.ts'
+import type { IdParams } from '~/schemas/base.schema.ts'
 import * as s from '~/schemas/user.schema.ts'
 
 export async function userRoutes(app: FastifyInstance) {

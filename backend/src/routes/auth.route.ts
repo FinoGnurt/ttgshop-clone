@@ -1,5 +1,5 @@
 import { type FastifyInstance } from 'fastify'
-import { refreshToken, signIn, signOut, signUp } from '~/controllers/index.ts'
+import { loginGoogle, refreshToken, signIn, signOut, signUp } from '~/controllers/index.ts'
 import * as auth from '~/schemas/auth.schema.ts'
 
 export async function authRoutes(app: FastifyInstance) {
@@ -26,4 +26,6 @@ export async function authRoutes(app: FastifyInstance) {
 
   // refresh: POST /auth/refresh
   app.post('/refresh', refreshToken)
+
+  app.post('/google', loginGoogle)
 }

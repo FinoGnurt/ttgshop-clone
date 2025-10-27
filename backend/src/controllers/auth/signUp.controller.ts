@@ -1,6 +1,5 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import type { SignUp } from '~/schemas/auth.schema.ts'
-import { OmitFieldSchema } from '~/schemas/base.schema.ts'
 import { hashPassword } from '~/utils/bcrypt.ts'
 import { sendError, sendSuccess } from '~/utils/replyHelper.ts'
 
@@ -36,7 +35,6 @@ export async function signUp(request: FastifyRequest<{ Body: SignUp }>, reply: F
     avatar
   }
 
-  console.log(OmitFieldSchema)
   // save data to db
   const result = await prisma.user.create({
     data,
