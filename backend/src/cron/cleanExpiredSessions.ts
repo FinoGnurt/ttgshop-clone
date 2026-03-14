@@ -1,16 +1,19 @@
-import type { FastifyInstance } from 'fastify'
 import cron from 'node-cron'
+import type { PrismaClient } from 'prisma/client'
 
-export const cleanExpiredSessions = (app: FastifyInstance) => {
+export function cleanExpiredSessions(prisma: PrismaClient) {
   // Lên lịch cron: chạy mỗi 1 giờ (0 phút mỗi giờ) 0 * * * *
-  cron.schedule('* * * * *', async () => {
-    console.log('🔄 Đang xóa các session hết hạn...')
+  // Lên lịch cron: chạy mỗi phút * * * * *
+  cron.schedule('0 * * * *', async () => {
+    console.log('🔄 Removing expired sessions...')
     try {
-      const result = await app.prisma.session.deleteMany({ where: { expiresAt: { lt: new Date() } } })
+      const result = await prisma.session.deleteMany({
+        where: { expiresAt: { lt: new Date() } }
+      })
 
-      console.log(`✅ Đã xóa ${result.count} session hết hạn.`)
+      console.log(`✅ Successfully removed ${result.count} expired sessions.`)
     } catch (err) {
-      console.error('❌ Lỗi khi xóa session:', err)
+      console.error('❌ An error occurred while deleting sessions:', err)
     }
   })
 }

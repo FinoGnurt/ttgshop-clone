@@ -32,3 +32,21 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # Finder (MacOS) folder config
 .DS_Store
+
+/generated/prisma
+
+/generated/prisma
+
+/generated/prisma
+
+/generated/prisma
+
+/generated/prisma
+
+/generated/prisma
+
+/generated/prisma
+
+/prisma/generated
+
+/prisma/generated

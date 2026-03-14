@@ -1,39 +1,54 @@
 import cookie from '@fastify/cookie'
+import fastifyEnv from '@fastify/env'
 import formbody from '@fastify/formbody'
 import jwt from '@fastify/jwt'
-import fastifyMultipart from '@fastify/multipart'
-import addErrors from 'ajv-errors'
+import multipart from '@fastify/multipart'
+import type { Plugin } from 'ajv'
+import ajvErrors from 'ajv-errors'
+import dotenv from 'dotenv'
 import fastify from 'fastify'
 import i18n from 'fastify-i18n'
 
 // import file
-import { cleanExpiredSessions } from '~/cron/cleanExpiredSessions.ts'
+import envOptions from '~/config/env.config.ts'
 import errorHandler from '~/middlewares/errorHandler.ts'
-import { addMetaResHook } from '~/plugins/addMetaResHook.ts'
-import prismaPlugin from '~/plugins/prismaDecorator.ts'
-import statusPlugin from '~/plugins/statusDecorator.ts'
+import errorPlugin from '~/plugins/decorators/error.plugin.ts'
+import minioPlugin from '~/plugins/decorators/minio.plugin.ts'
+import prismaPlugin from '~/plugins/decorators/prisma.plugin.ts'
+import replyPlugin from '~/plugins/decorators/reply.plugin.ts'
+import statusPlugin from '~/plugins/decorators/status.plugin.ts'
+import addMetaResponse from '~/plugins/hooks/metadata.plugin.ts'
 import apiRoutes from '~/routes/_index.ts'
 import { arrAllSchema } from '~/schemas/base.schema.ts'
 import loadLocale from '~/utils/loadFileLocale.ts'
 
-// options fastify
-const app = fastify({
-  logger: false, // bật log
-  ajv: {
-    customOptions: {
-      allErrors: true, // cần thiết để hiển thị nhiều lỗi cùng lúc
-      strict: false,
-      $data: true, // hỗ trợ custom keyword (nếu cần)
-      messages: true
-    },
-    plugins: [addErrors.default]
-  }
-})
+dotenv.config({ path: '.env' })
 
-export const buildApp = () => {
-  // Plugins
-  app.register(fastifyMultipart)
-  //   app.register(cors, { origin: "*" }); app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+export const buildApp = async () => {
+  const app = fastify({
+    logger: false,
+    ajv: {
+      customOptions: {
+        allErrors: true,
+        strict: false,
+        $data: true,
+        messages: true
+      },
+      plugins: [ajvErrors as unknown as Plugin<unknown>]
+    }
+  })
+
+  // ========================
+  // 1. Load environment
+  // ========================
+  await app.register(fastifyEnv, envOptions)
+  await app.after() // đảm bảo app.env đã sẵn sàng
+
+  // ========================
+  // 2. Register plugins
+  // ========================
+  app.register(multipart)
+  app.register(formbody)
   app.register(prismaPlugin)
   app.register(i18n, {
     fallbackLocale: 'vi',
@@ -43,21 +58,53 @@ export const buildApp = () => {
     }
   })
   app.register(statusPlugin)
-  app.register(formbody) //urlencoded
-  app.register(jwt, { secret: process.env.ACCESS_TOKEN_SECRET as string })
+  app.register(jwt, { secret: app.env.ACCESS_TOKEN_SECRET, namespace: 'access' })
+  app.register(jwt, { secret: app.env.REFRESH_TOKEN_SECRET, namespace: 'refresh' })
   app.register(cookie)
+  app.register(replyPlugin)
+  app.register(minioPlugin)
+  app.register(errorPlugin)
 
-  addMetaResHook(app)
+  // ========================
+  // 3. Hooks
+  // ========================
+  addMetaResponse(app)
 
-  // Routes
+  // ========================
+  // 4. Routes
+  // ========================
+  app.get('/', async (req, rep) => {
+    rep.hijack()
+    rep.raw.writeHead(200, { 'Content-Type': 'text/plain' })
+    rep.raw.end('Welcome to TTGShop API from Fastify!')
+  })
+
+  app.get('/sse', (req, reply) => {
+    reply.raw.setHeader('Content-Type', 'text/event-stream')
+    reply.raw.setHeader('Cache-Control', 'no-cache')
+    reply.raw.setHeader('Connection', 'keep-alive')
+    reply.hijack()
+
+    const stream = reply.raw
+    const interval = setInterval(() => {
+      stream.write(`data: ${Date.now()}\n\n`)
+    }, 1000)
+
+    req.raw.on('close', () => {
+      clearInterval(interval)
+    })
+  })
+
   app.register(apiRoutes, { prefix: '/api' })
 
-  // middlewares
+  // ========================
+  // 5. Error handler
+  // ========================
   errorHandler(app)
 
-  cleanExpiredSessions(app)
-
-  // add schema to server fastify
+  // ========================
+  // 6. Add schemas
+  // ========================
   arrAllSchema.forEach((schema) => app.addSchema(schema))
 
   return app

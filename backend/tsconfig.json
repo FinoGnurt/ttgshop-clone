@@ -32,10 +32,10 @@
     "baseUrl": ".", // Đường dẫn base cho các import
     "paths": {
       "~/*": ["src/*"], // Đường dẫn tương đối cho các import (alias)
-      "public/*": ["public/*"] // Đường dẫn tương đối cho các import (alias)
+      "prisma/client": ["prisma/generated/client.ts"] // Đường dẫn tương đối cho các import (alias)
     }
   },
 
-  "files": ["src/types/index.d.ts"], // Các file dùng để defined global type cho dự án
+  "files": ["src/types/fastify.d.ts", "src/types/env.d.ts"], // Các file dùng để defined global type cho dự án
   "include": ["src/**/*"] // Đường dẫn include cho các file cần build
 }

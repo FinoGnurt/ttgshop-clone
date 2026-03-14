@@ -1,6 +1,7 @@
 {
   "EMAIL_REQUIRED": "Please enter an email address.",
   "EMAIL_INVALID": "Invalid email address.",
+  "EMAIL_DUPLICATE": "Email already exists. Please enter a different email address!",
   "PASSWORD_REQUIRED": "Please enter a password.",
   "PASSWORD_INVALID": "Password must be at least 8 characters long and include uppercase letters, lowercase letters, and numbers.",
   "NAME_REQUIRED": "Please enter a username.",

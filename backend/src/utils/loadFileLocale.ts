@@ -1,9 +1,3 @@
-// export default function loadLocale(filename: any) {
-//   return JSON.parse(
-//     readFileSync(path.join(__dirname, "..", "locales", filename), "utf-8")
-//   );
-// }
-
 import { readFileSync, readdirSync } from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -20,7 +14,7 @@ export default function loadLocale(localeDir: string) {
   const dirPath = path.join(__dirname, '..', 'locales', localeDir)
   const files = readdirSync(dirPath).filter((f) => f.endsWith('.json'))
 
-  const mergedLocale: Record<string, any> = {}
+  const mergedLocale: Record<string, string> = {}
 
   for (const file of files) {
     const filePath = path.join(dirPath, file)
@@ -30,3 +24,10 @@ export default function loadLocale(localeDir: string) {
 
   return mergedLocale
 }
+
+///
+// export default function loadLocale(filename: any) {
+//   return JSON.parse(
+//     readFileSync(path.join(__dirname, "..", "locales", filename), "utf-8")
+//   );
+// }

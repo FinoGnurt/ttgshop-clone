@@ -13,6 +13,44 @@ export type GetUser = Static<typeof GetUserSchema>
 export const GetAllUserSchema = ResponseBaseSchema({ dataSchema: Type.Array(OmitFieldSchema) })
 export type GetAllUser = Static<typeof GetAllUserSchema>
 
+// query users
+enum SortOrder {
+  asc = 'asc',
+  desc = 'desc'
+}
+export const queryUsersSchema = Type.Object(
+  {
+    page: Type.Optional(Type.Integer({ minimum: 1, default: 1 })),
+    limit: Type.Optional(Type.Integer({ minimum: 1, default: 10 })),
+    sortBy: Type.Optional(Type.String({ default: 'createdAt' })),
+    order: Type.Optional(Type.Enum(SortOrder, { default: SortOrder.desc })),
+    status: Type.Optional(Type.Union([Type.Literal('active'), Type.Literal('inactive')])),
+    isBan: Type.Optional(Type.Boolean({ default: false })),
+    email: Type.Optional(Type.String()),
+    name: Type.Optional(Type.String()),
+    phone: Type.Optional(Type.String({ pattern: '^[0-9]{10}$' })),
+    address: Type.Optional(Type.String())
+  },
+  {
+    errorMessage: {
+      properties: {
+        page: 'QUERY_PAGE_INVALID',
+        limit: 'QUERY_LIMIT_INVALID',
+        sortBy: 'QUERY_SORT_BY_INVALID',
+        order: 'QUERY_ORDER_INVALID',
+        keyword: 'QUERY_KEYWORD_INVALID',
+        status: 'QUERY_STATUS_INVALID',
+        isBan: 'QUERY_IS_BAN_INVALID',
+        email: 'QUERY_EMAIL_INVALID',
+        name: 'QUERY_NAME_INVALID',
+        phone: 'QUERY_PHONE_INVALID',
+        address: 'QUERY_ADDRESS_INVALID'
+      }
+    }
+  }
+)
+export type QueryUsers = Static<typeof queryUsersSchema>
+
 // export type ResponseUser = typeof ResponseUserSchema.static
 
 // Note: schema dung cho route

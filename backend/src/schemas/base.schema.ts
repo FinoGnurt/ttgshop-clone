@@ -34,7 +34,7 @@ export const UserSchema = Type.Object(
     id: Type.String(),
     email: Type.String({ format: 'email' }),
     password: Type.String({ pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$' }),
-    name: Type.String({ errorMessage: { format: 'EMAIL_INVALID' } }),
+    name: Type.String(),
     phone: Type.Optional(Type.Union([Type.String({ pattern: '^[0-9]{10}$' }), Type.Null()])),
     address: Type.Optional(Type.Union([Type.String(), Type.Null()])),
     avatar: Type.Optional(Type.String()),
@@ -114,3 +114,7 @@ export const ResponseBaseSchema = ({
         })
       ),
    */
+
+/**
+ *     name: Type.String({ errorMessage: { format: 'NAME_INVALID' } }),
+ */
