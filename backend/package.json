@@ -11,8 +11,13 @@
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "migrate": "bun x prisma migrate dev --name init",
-    "generate": "bun x prisma generate"
+    "db:migrate:init": "bun x prisma migrate dev --name init",
+    "db:migrate": "bun x prisma migrate dev",
+    "db:generate": "bun x prisma generate",
+    "db:studio": "bun x prisma studio",
+    "db:reset": "bun x prisma migrate reset",
+    "db:push": "bun x prisma db push",
+    "db:pull": "bun x prisma db pull"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

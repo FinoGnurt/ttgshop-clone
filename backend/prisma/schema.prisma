@@ -31,7 +31,7 @@ model User {
 
 model Avatar {
   id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   image     Bytes?
   createdAt DateTime @default(now())
@@ -41,7 +41,7 @@ model Avatar {
 
 model Session {
   userId       String   @id
-  user         User     @relation(fields: [userId], references: [id])
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   refreshToken String   @unique @db.VarChar(512)
   expiresAt    DateTime
   createdAt    DateTime @default(now())
